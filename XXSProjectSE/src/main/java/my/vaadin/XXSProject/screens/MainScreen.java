@@ -18,7 +18,7 @@ import my.vaadin.XXSProject.views.settingsView.SettingsView;
  * 
  */
 public class MainScreen extends HorizontalLayout {
-    private Menu menu;
+    private NavigatorMenu navigatorMenu;
 
     public MainScreen(MyUI ui) {
 
@@ -31,19 +31,19 @@ public class MainScreen extends HorizontalLayout {
 
         final Navigator navigator = new Navigator(ui, viewContainer);
         navigator.setErrorView(StartView.class);
-        menu = new Menu(navigator);
-        menu.addView(new OverviewView(), OverviewView.VIEW_NAME,
-        		OverviewView.VIEW_NAME, VaadinIcons.EDIT);
-        menu.addView(new LogView(), LogView.VIEW_NAME, LogView.VIEW_NAME,
-                VaadinIcons.INFO_CIRCLE);
-        menu.addView(new SettingsView(), SettingsView.VIEW_NAME, SettingsView.VIEW_NAME,
-                VaadinIcons.INFO_CIRCLE);
-        menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
+        navigatorMenu = new NavigatorMenu(navigator);
+        navigatorMenu.addView(new OverviewView(), OverviewView.VIEW_NAME,
+        		OverviewView.VIEW_NAME, VaadinIcons.HOME);
+        navigatorMenu.addView(new LogView(), LogView.VIEW_NAME, LogView.VIEW_NAME,
+                VaadinIcons.DATE_INPUT);
+        navigatorMenu.addView(new SettingsView(), SettingsView.VIEW_NAME, SettingsView.VIEW_NAME,
+                VaadinIcons.COGS);
+        navigatorMenu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
                 VaadinIcons.INFO_CIRCLE);
 
         navigator.addViewChangeListener(viewChangeListener);
 
-        addComponent(menu);
+        addComponent(navigatorMenu);
         addComponent(viewContainer);
         setExpandRatio(viewContainer, 1);
         setSizeFull();
@@ -60,7 +60,7 @@ public class MainScreen extends HorizontalLayout {
 
         @Override
         public void afterViewChange(ViewChangeEvent event) {
-            menu.setActiveView(event.getViewName());
+            navigatorMenu.setActiveView(event.getViewName());
         }
 
     };

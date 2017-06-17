@@ -8,7 +8,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- * View der angezeigt wird, wenn man sich in die App einloggt. 
+ * View, der angezeigt wird, wenn man sich in die App einloggt. 
  * 
  */
 public class StartView extends VerticalLayout implements View {

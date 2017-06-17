@@ -24,9 +24,9 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- * Responsive navigation menu presenting a list of available views to the user.
+ * Responsive Navigationsmenü mit den verschiedenen Views.
  */
-public class Menu extends CssLayout {
+public class NavigatorMenu extends CssLayout {
 
     private static final String VALO_MENUITEMS = "valo-menuitems";
     private static final String VALO_MENU_TOGGLE = "valo-menu-toggle";
@@ -37,7 +37,7 @@ public class Menu extends CssLayout {
     private CssLayout menuItemsLayout;
     private CssLayout menuPart;
 
-    public Menu(Navigator navigator) {
+    public NavigatorMenu(Navigator navigator) {
         this.navigator = navigator;
         setPrimaryStyleName(ValoTheme.MENU_ROOT);
         menuPart = new CssLayout();
