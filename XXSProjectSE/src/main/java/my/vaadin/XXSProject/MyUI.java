@@ -17,13 +17,17 @@ import my.vaadin.XXSProject.screens.LoginScreen;
 import my.vaadin.XXSProject.screens.MainScreen;
 
 /**
- * Main UI class of the application that shows either the login screen or the
- * main view of the application depending on whether a user is signed in.
+ * Herlich Willkommen im Herzstück der XXS-Pumperapp!
+ * 
+ * Dies ist die Hauptklasse der Applikation, die das Layout bildet und initial prüft, 
+ * ob ein User eingeloggt ist. Ist dies der Fall, startet der Mainscreen der Applikation, 
+ * andernfalls öffnet sich Startbildschirm, auf dem man sich einloggen bzw. registrieren kann
  *
- * The @Viewport annotation configures the viewport meta tags appropriately on
- * mobile devices. Instead of device based scaling (default), using responsive
- * layouts.
- */
+ * @Viewport sorgt automatisch für eine richtige Skalierung auf kleinen Geräten.
+ * FÜr das Theming wird die Vaadin Integration Valo verwendet.
+ **/
+
+
 @Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("mytheme")
 public class MyUI extends UI {
@@ -35,8 +39,8 @@ public class MyUI extends UI {
         Responsive.makeResponsive(this);
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle("XXS PumperApp");
-//        setContent(new LoginScreen(this));
-        showMainView();
+        setContent(new LoginScreen(this));
+//        showMainView();
         
     }
 
@@ -50,16 +54,13 @@ public class MyUI extends UI {
         return (MyUI) UI.getCurrent();
     }
 
+	public LoginService getLoginService() {
+		return loginService;
+	}
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 
-
-	public LoginService getLoginService() {
-		System.out.println("getLogin");
-		// TODO Auto-generated method stub
-		return loginService;
-	}
 }
