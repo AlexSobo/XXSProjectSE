@@ -26,16 +26,16 @@ import my.vaadin.XXSProject.databaseClasses.LoginService;
 public class LoginScreen extends CssLayout {
 
 	private MyUI parentUi;
-    private TextField tfUsername, tfFirstName, tfLastName, tfEmail;
-    private PasswordField pfPassword, pfPasswortRepeat;
+    private TextField tfUsername, tfUsernameNew, tfFirstName, tfLastName, tfEmail;
+    private PasswordField pfPassword, pfPasswordNew, pfPasswortRepeat;
     private Button btnLogin, btnRegister;
     private Button forgotPassword;
     private CheckBox boxRegistered;
     private LoginListener loginListener;
     private LoginService loginService;
     private VerticalLayout centeringLayout;
-    private Component loginForm;
-    private Component registerForm;
+    private FormLayout loginForm;
+    private FormLayout registerForm;
 
     public LoginScreen(MyUI ui) {
     	this.parentUi = ui;
@@ -76,7 +76,7 @@ public class LoginScreen extends CssLayout {
         registerForm = buildRegisterForm();
     }
 
-    private Component buildLoginForm() {
+    private FormLayout buildLoginForm() {
 
 		FormLayout loginForm = new FormLayout();
 
@@ -90,12 +90,6 @@ public class LoginScreen extends CssLayout {
 		this.pfPassword.setDescription("Passwort");
 		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
-		loginForm.addComponent(buttons);
-		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
-		this.boxRegistered.setValue(true);
-		this.boxRegistered.addValueChangeListener(event->{
-			this.checkBoxValueChanged();
-		});
 		
 		buttons.addComponent(btnLogin = new Button("Dummy-Login"));
 		btnLogin.addClickListener(Event -> {
@@ -113,23 +107,45 @@ public class LoginScreen extends CssLayout {
 			}
 		});
 		forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
+		
+		loginForm.addComponent(buttons);
+		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
+		this.boxRegistered.setValue(true);
+		this.boxRegistered.addValueChangeListener(event->{
+			this.checkBoxValueChanged();
+		});
+		
 		return loginForm;
     }
     
-    private Component buildRegisterForm(){
+    private FormLayout buildRegisterForm(){
     	FormLayout registerForm = new FormLayout();
     	registerForm.addStyleName("login-form");
     	registerForm.setSizeUndefined();
     	registerForm.setMargin(false);
-    	registerForm.addComponent(tfUsername);
+    	registerForm.addComponent(this.tfUsernameNew = new TextField("Benutzername"));
+		this.tfUsernameNew.setWidth(15, Unit.EM);
     	registerForm.addComponent(this.tfFirstName = new TextField("Vorname"));
     	this.tfFirstName.setWidth(15, Unit.EM);
     	registerForm.addComponent(this.tfLastName = new TextField("Nachname"));
     	this.tfLastName.setWidth(15, Unit.EM);
-    	registerForm.addComponent(pfPassword);
+    	registerForm.addComponent(this.pfPasswordNew = new PasswordField("Passwort"));
+		this.pfPasswordNew.setWidth(15, Unit.EM);
+		this.pfPasswordNew.setDescription("Passwort");
     	registerForm.addComponent(this.pfPasswortRepeat = new PasswordField("Passwort wiederholen"));
     	this.pfPasswortRepeat.setWidth(15, Unit.EM);
     	this.pfPasswortRepeat.setDescription("Passwort wiederholen");
+    	
+    	CssLayout buttons = new CssLayout();
+		buttons.setStyleName("buttons");
+		buttons.addComponent(this.btnRegister = new Button("Registrieren"));
+		btnRegister.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		btnRegister.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+		btnRegister.addClickListener(event ->{
+			
+		});
+		registerForm.addComponent(buttons);
+		
     	return registerForm;
     }
 
@@ -156,12 +172,20 @@ public class LoginScreen extends CssLayout {
 		if(this.boxRegistered.getValue()){
 			this.centeringLayout.removeAllComponents();
 			this.centeringLayout.addComponent(this.loginForm);
+			this.loginForm.addComponent(this.boxRegistered);
+			centeringLayout.setComponentAlignment(loginForm,
+	                Alignment.MIDDLE_CENTER);
 		} else{
 			this.centeringLayout.removeAllComponents();
 			this.centeringLayout.addComponent(this.registerForm);
+			this.registerForm.addComponent(this.boxRegistered);
 			centeringLayout.setComponentAlignment(registerForm,
 	                Alignment.MIDDLE_CENTER);
 		}
+	}
+	
+	private void btnRegisterWasClicked(){
+		System.out.println("Aktiv");
 	}
 
     private void showNotification(Notification notification) {
