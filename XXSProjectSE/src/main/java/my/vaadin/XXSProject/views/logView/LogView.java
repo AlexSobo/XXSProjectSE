@@ -30,7 +30,7 @@ public class LogView extends CssLayout implements View {
 
 	private NativeSelect<WorkoutPlan> selectPlan;
 	private LogShowDisplay logShowDisplay;
-	// private LogShowChart logShowChart;
+	private LogShowChart logShowChart;
 	private ArrayList<LogAddDisplay> currentLogAddDisplays;
 
 	public LogView(MyUI ui) {
@@ -56,8 +56,9 @@ public class LogView extends CssLayout implements View {
 		logShowDisplay = new LogShowDisplay();
 		contentLayout.addComponent(logShowDisplay);
 
-		// this.logShowChart = new LogShowChart();
-		// this.addComponent(logShowChart);
+		 this.logShowChart = new LogShowChart();
+		 this.logShowChart.setWidth(50, Unit.EM);
+		 contentLayout.addComponent(logShowChart);
 
 		selectPlan = new NativeSelect<>("Logs hinzufügen");
 		selectPlan.setEmptySelectionAllowed(false);
@@ -77,13 +78,12 @@ public class LogView extends CssLayout implements View {
 	// LogShowDisplay aktualisieren
 	public void updateLogShow(Exercise exerciseToShow) {
 		this.logShowDisplay.showLogsForExersice(exerciseToShow);
-		// this.logShowChart.showLogsForExercise(exerciseToShow);
+		this.logShowChart.showLogsForExercise(exerciseToShow);
 	}
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet
-		// ist
+		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet ist
 
 		// Daten für Plan-Select laden
 		WorkoutPlanTableConnector workoutPlanProvider = new WorkoutPlanTableConnector();
