@@ -12,6 +12,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
 import my.vaadin.XXSProject.databaseClasses.LoginService;
+import my.vaadin.XXSProject.databaseClasses.RegisterService;
 import my.vaadin.XXSProject.databaseEntities.User;
 import my.vaadin.XXSProject.screens.LoginScreen;
 import my.vaadin.XXSProject.screens.MainScreen;
@@ -36,6 +37,7 @@ public class MyUI extends UI {
 	private String loggedInUsername;
 	
 	private final LoginService loginService = new LoginService(this);
+	private final RegisterService registerService = new RegisterService(this);
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -55,6 +57,7 @@ public class MyUI extends UI {
         getNavigator().navigateTo(getNavigator().getState());
     }
 
+	//Getter und Setter
     public MyUI get() {
         return (MyUI) UI.getCurrent();
     }
@@ -63,7 +66,10 @@ public class MyUI extends UI {
 		return loginService;
 	}
 	
-	//Getter und Setter
+	public RegisterService getRegisterService() {
+		return registerService;
+	}
+	
 	public String getLoggedInUsername(){
 		String returnString = (String)this.getSession().getAttribute("user");
 		return returnString;

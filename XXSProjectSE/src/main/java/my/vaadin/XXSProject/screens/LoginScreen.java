@@ -6,7 +6,6 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
@@ -19,6 +18,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import my.vaadin.XXSProject.MyUI;
 import my.vaadin.XXSProject.databaseClasses.LoginService;
+import my.vaadin.XXSProject.views.overviewView.OverviewView;
 
 /**
  * UI content when the user is not logged in yet.
@@ -38,8 +38,8 @@ public class LoginScreen extends CssLayout {
     private FormLayout registerForm;
 
     public LoginScreen(MyUI ui) {
-    	this.loginService = new LoginService(parentUi);
     	this.parentUi = ui;
+    	this.loginService = parentUi.getLoginService();
     	
     	if(this.parentUi.getLoggedInUsername()==null){
     		buildUI();
@@ -92,7 +92,7 @@ public class LoginScreen extends CssLayout {
 		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
 		
-		buttons.addComponent(btnLogin = new Button("Dummy-Login"));
+		buttons.addComponent(btnLogin = new Button("Login"));
 		btnLogin.addClickListener(Event -> {
 			System.out.println("Bin aktiv");
 			btnLoginWasClicked();
@@ -126,6 +126,8 @@ public class LoginScreen extends CssLayout {
     	registerForm.setMargin(false);
     	registerForm.addComponent(this.tfUsernameNew = new TextField("Benutzername"));
 		this.tfUsernameNew.setWidth(15, Unit.EM);
+		registerForm.addComponent(this.tfEmail = new TextField("Benutzername"));
+		this.tfEmail.setWidth(15, Unit.EM);
     	registerForm.addComponent(this.tfFirstName = new TextField("Vorname"));
     	this.tfFirstName.setWidth(15, Unit.EM);
     	registerForm.addComponent(this.tfLastName = new TextField("Nachname"));
@@ -173,11 +175,7 @@ public class LoginScreen extends CssLayout {
 			} else {
 				showNotification(new Notification("Benutzername und Passwort nicht bekannt!"));
 			}
-		}
-		
-//		System.out.println("dummyMethode");
-//		parentUi.getLoginService().dummyLogIn();
-		
+		}		
 	}
 	
 	// Action, wenn Checkbox Wert ändert
@@ -199,7 +197,27 @@ public class LoginScreen extends CssLayout {
 	
 	// Action, wenn Registrierungs-Button gedrückt wird
 	private void btnRegisterWasClicked(){
-		System.out.println("Aktiv");
+
+
+		// Test, ob Daten vollständig eingegeben
+		if (tfUsernameNew.getValue().equals("") || tfEmail.getValue().equals("") || tfFirstName.getValue().equals("")
+				|| tfLastName.getValue().equals("") || pfPasswordNew.getValue().equals("")
+				|| pfPasswortRepeat.getValue().equals("")) {
+			showNotification(new Notification("Daten unvollständig eingegeben!"));
+			// Test, ob Passwörter gleich
+		} else if (!pfPasswordNew.getValue().equals(pfPasswortRepeat.getValue())) {
+			showNotification(new Notification("Passwörter nicht identisch!"));
+		} else {
+			// Versuch, User zu registrieren
+			if (this.parentUi.getRegisterService().registerUser(tfUsernameNew.getValue(), pfPasswordNew.getValue(),
+					tfEmail.getValue(), tfFirstName.getValue(), tfLastName.getValue())) {
+				parentUi.showMainView();
+				// Benutzername oder Mailadresse bereits vorhanden
+			} else {
+				showNotification(new Notification("Daten bereits vorhanden!"));
+			}
+		}
+	
 	}
 
     private void showNotification(Notification notification) {
