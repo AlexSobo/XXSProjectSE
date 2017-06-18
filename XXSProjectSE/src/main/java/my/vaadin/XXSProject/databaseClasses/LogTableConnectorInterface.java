@@ -9,8 +9,8 @@ public interface LogTableConnectorInterface {
 			String exerciveName);
 
 	public void addLog(Log logToAdd);
-	
+
 	public void deleteLogsForUsernameAndWorkOutPlan(String username, String workoutPlan);
-	
+
 	public void deleteLogsForUsernameAndWorkoutPlanAndExercise(String username, String workoutPlan, String exercise);
 }

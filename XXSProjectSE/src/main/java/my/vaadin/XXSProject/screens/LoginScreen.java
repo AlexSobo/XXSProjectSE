@@ -124,9 +124,9 @@ public class LoginScreen extends CssLayout {
 	}
 
 	private FormLayout buildRegisterForm() {
-		
+
 		FormLayout registerForm = new FormLayout();
-		
+
 		registerForm.addStyleName("login-form");
 		registerForm.setSizeUndefined();
 		registerForm.setMargin(false);
@@ -159,9 +159,7 @@ public class LoginScreen extends CssLayout {
 	private CssLayout buildLoginInformation() {
 		CssLayout loginInformation = new CssLayout();
 		loginInformation.setStyleName("login-information");
-		Label loginInfoText = new Label(
-				"<h1>XXS PumperApp</h1>"
-						+ "Ein Projekt von Felix, Alex und Dennis",
+		Label loginInfoText = new Label("<h1>XXS PumperApp</h1>" + "Ein Projekt von Felix, Alex und Dennis",
 				ContentMode.HTML);
 		loginInfoText.setSizeFull();
 		loginInformation.addComponent(loginInfoText);

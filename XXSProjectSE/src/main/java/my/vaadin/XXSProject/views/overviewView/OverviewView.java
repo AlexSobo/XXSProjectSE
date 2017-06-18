@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
@@ -53,20 +54,15 @@ public class OverviewView extends CssLayout implements View {
 	public OverviewView(MyUI ui) {
 		this.parentUI = ui;
 		setSizeFull();
-		addStyleName("overview-view");
+		addStyleName("about-view");
 
-//		VerticalLayout centeringLayout = new VerticalLayout();
-//		centeringLayout.setMargin(false);
-//		centeringLayout.setSpacing(false);
 		VerticalLayout contentLayoutWorkout = new VerticalLayout();
 		contentLayoutWorkout = this.buildUIWorkout();
+		contentLayoutWorkout.setStyleName("about-view");
 		VerticalLayout contentLayoutExercises = new VerticalLayout();
 		contentLayoutExercises = this.buildUIExercises();
-//		centeringLayout.setStyleName("centering-layout");
+		contentLayoutExercises.setStyleName("about-view");
 		this.addComponents(contentLayoutWorkout, contentLayoutExercises);
-//		centeringLayout.setComponentAlignment(contentLayoutWorkout, Alignment.MIDDLE_CENTER);
-//		centeringLayout.setComponentAlignment(contentLayoutExercises, Alignment.MIDDLE_CENTER);
-//		this.addComponent(centeringLayout);
 	}
 
 	private VerticalLayout buildUIExercises() {
@@ -80,14 +76,14 @@ public class OverviewView extends CssLayout implements View {
 		this.gridExercises.setWidthUndefined();
 
 		this.existingExercises = null;
-		
+
 		this.tfAddExerciseName = new TextField("Neue Übung Name");
 		this.tfAddExerciseTargReps = new TextField("Neue Übung Reps");
 		this.tfAddExerciseTargSets = new TextField("Neue Übung Sets");
 		this.tfAddExerciseTargWeights = new TextField("Neue Übung Gewicht");
 		this.btnAddExercise = new Button("Übung hinzufügen");
 		this.btnRmvExercise = new Button("Ausgewählte Übung löschen");
-		
+
 		// Übung hinzufügen
 		this.btnAddExercise.addClickListener(e -> {
 			// Validitätscheck der eingegebenen Daten
@@ -153,6 +149,7 @@ public class OverviewView extends CssLayout implements View {
 			}
 
 		});
+		btnAddExercise.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
 		// Übung löschen
 		this.btnRmvExercise.addClickListener(e -> {
@@ -188,7 +185,8 @@ public class OverviewView extends CssLayout implements View {
 				Notification.show("Kein Plan ausgewählt", "", Notification.Type.HUMANIZED_MESSAGE);
 			}
 		});
-		
+		btnRmvExercise.setClickShortcut(ShortcutAction.KeyCode.DELETE);
+
 		contentLayoutExercises.addComponent(gridExercises);
 		contentLayoutExercises.addComponent(tfAddExerciseName);
 		contentLayoutExercises.addComponent(tfAddExerciseTargReps);
@@ -196,7 +194,7 @@ public class OverviewView extends CssLayout implements View {
 		contentLayoutExercises.addComponent(tfAddExerciseTargWeights);
 		contentLayoutExercises.addComponent(btnAddExercise);
 		contentLayoutExercises.addComponent(btnRmvExercise);
-		
+
 		return contentLayoutExercises;
 	}
 
@@ -329,8 +327,6 @@ public class OverviewView extends CssLayout implements View {
 			tfAddWorkoutPlanDesc.clear();
 
 		});
-
-
 
 		// Komponenten final zu Layout hinzufügen
 		contentLayoutWorkout.addComponent(gridWorkouts);

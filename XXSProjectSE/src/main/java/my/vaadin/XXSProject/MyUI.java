@@ -20,62 +20,62 @@ import my.vaadin.XXSProject.screens.MainScreen;
 /**
  * Herzlich Willkommen im Herzstück der XXS-Pumperapp!
  * 
- * Dies ist die Hauptklasse der Applikation, die das Layout bildet und zum LoginScreen weiterleitet.
- * Im LoginScreen wird überprüft, ob ein Nutzer eingeloggt ist.
- * Ist dies der Fall, startet der Mainscreen der Applikation (showMainView).
+ * Dies ist die Hauptklasse der Applikation, die das Layout bildet und zum
+ * LoginScreen weiterleitet. Im LoginScreen wird überprüft, ob ein Nutzer
+ * eingeloggt ist. Ist dies der Fall, startet der Mainscreen der Applikation
+ * (showMainView).
  *
  * @Viewport sorgt automatisch für eine richtige Skalierung auf kleinen Geräten.
- * Für das Theming wird die Vaadin Integration Valo verwendet.
+ *           Für das Theming wird die Vaadin Integration Valo verwendet.
  **/
-
 
 @Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("mytheme")
 
 public class MyUI extends UI {
-	
+
 	private String loggedInUsername;
-	
+
 	private final LoginService loginService = new LoginService(this);
 	private final RegisterService registerService = new RegisterService(this);
 
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	this.loggedInUsername = null;
-    	
-        Responsive.makeResponsive(this);
-        setLocale(vaadinRequest.getLocale());
-        getPage().setTitle("XXS PumperApp");
-        setContent(new LoginScreen(this));
-        
-    }
+	@Override
+	protected void init(VaadinRequest vaadinRequest) {
+		this.loggedInUsername = null;
 
-    public void showMainView() {
-        addStyleName(ValoTheme.UI_WITH_MENU);
-        setContent(new MainScreen(MyUI.this));
-        getNavigator().navigateTo(getNavigator().getState());
-    }
+		Responsive.makeResponsive(this);
+		setLocale(vaadinRequest.getLocale());
+		getPage().setTitle("XXS PumperApp");
+		setContent(new LoginScreen(this));
 
-	//Getter und Setter
-    public MyUI get() {
-        return (MyUI) UI.getCurrent();
-    }
+	}
+
+	public void showMainView() {
+		addStyleName(ValoTheme.UI_WITH_MENU);
+		setContent(new MainScreen(MyUI.this));
+		getNavigator().navigateTo(getNavigator().getState());
+	}
+
+	// Getter und Setter
+	public MyUI get() {
+		return (MyUI) UI.getCurrent();
+	}
 
 	public LoginService getLoginService() {
 		return loginService;
 	}
-	
+
 	public RegisterService getRegisterService() {
 		return registerService;
 	}
-	
-	public String getLoggedInUsername(){
-		return (String)this.getSession().getAttribute("user");
+
+	public String getLoggedInUsername() {
+		return (String) this.getSession().getAttribute("user");
 	}
 
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
+	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+	@VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+	public static class MyUIServlet extends VaadinServlet {
+	}
 
 }

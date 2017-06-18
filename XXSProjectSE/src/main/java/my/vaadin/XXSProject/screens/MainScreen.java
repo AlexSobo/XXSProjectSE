@@ -48,7 +48,6 @@ public class MainScreen extends HorizontalLayout {
 		setSizeFull();
 	}
 
-
 	ViewChangeListener viewChangeListener = new ViewChangeListener() {
 
 		@Override

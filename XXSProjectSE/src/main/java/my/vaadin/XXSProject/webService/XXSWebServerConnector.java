@@ -10,8 +10,8 @@ import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
 
 public class XXSWebServerConnector {
-	public static String getSQLDateAsStringFromService(){
-		WebResource service = Client.create().resource( "http://localhost:8081/rest" );
-		return service.path( "sqlTodayDateAsString" ).accept( MediaType.TEXT_PLAIN ).get( String.class );
+	public static String getSQLDateAsStringFromService() {
+		WebResource service = Client.create().resource("http://localhost:8081/rest");
+		return service.path("sqlTodayDateAsString").accept(MediaType.TEXT_PLAIN).get(String.class);
 	}
 }

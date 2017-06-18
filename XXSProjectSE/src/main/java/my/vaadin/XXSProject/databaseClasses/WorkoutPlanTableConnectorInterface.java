@@ -10,6 +10,5 @@ public interface WorkoutPlanTableConnectorInterface {
 	public void addWorkoutPlanForUsername(WorkoutPlan newWorkout);
 
 	public void deleteWorkoutPlanForUserName(String username, String planName);
-	
 
 }

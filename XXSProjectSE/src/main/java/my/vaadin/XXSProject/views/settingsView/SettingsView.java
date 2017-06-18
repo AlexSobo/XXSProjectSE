@@ -32,7 +32,7 @@ public class SettingsView extends VerticalLayout implements View {
 
 		setSizeFull();
 		setMargin(false);
-		setStyleName("Settings-View");
+		setStyleName("about-view");
 
 		VerticalLayout centeringLayout = new VerticalLayout();
 		centeringLayout.setMargin(false);

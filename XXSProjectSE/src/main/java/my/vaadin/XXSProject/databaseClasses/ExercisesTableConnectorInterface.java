@@ -10,6 +10,6 @@ public interface ExercisesTableConnectorInterface {
 	public void addExerciseToPlan(Exercise newExercise);
 
 	public void deleteExerciseForUsernameAndPlan(String username, String planName, String exerciseName);
-	
+
 	public void deleteExercisesForUsernameAndPlan(String username, String planName);
 }

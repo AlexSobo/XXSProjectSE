@@ -8,24 +8,22 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- * View, der angezeigt wird, wenn man sich in die App einloggt. 
+ * View, der angezeigt wird, wenn man sich in die App einloggt.
  * 
  */
 public class StartView extends VerticalLayout implements View {
 
-    public StartView() {
-        Label header = new Label("Herzlich Willkommen in der XXS-Pumperapp!");
-        header.addStyleName(ValoTheme.LABEL_H1);
-        addComponent(header);
-        addComponent(new Label("Viel Spaß! Pump up your Life!"));
-    }
+	public StartView() {
+		Label header = new Label("Herzlich Willkommen in der XXS-Pumperapp!");
+		header.addStyleName(ValoTheme.LABEL_H1);
+		addComponent(header);
+		addComponent(new Label("Viel Spaß! Pump up your Life!"));
+	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 }
