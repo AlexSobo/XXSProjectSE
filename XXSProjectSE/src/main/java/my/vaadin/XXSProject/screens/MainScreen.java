@@ -32,7 +32,7 @@ public class MainScreen extends HorizontalLayout {
         final Navigator navigator = new Navigator(ui, viewContainer);
         navigator.setErrorView(StartView.class);
         navigatorMenu = new NavigatorMenu(navigator);
-        navigatorMenu.addView(new OverviewView(), OverviewView.VIEW_NAME,
+        navigatorMenu.addView(new OverviewView(ui), OverviewView.VIEW_NAME,
         		OverviewView.VIEW_NAME, VaadinIcons.HOME);
         navigatorMenu.addView(new LogView(), LogView.VIEW_NAME, LogView.VIEW_NAME,
                 VaadinIcons.DATE_INPUT);

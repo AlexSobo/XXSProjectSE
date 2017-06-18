@@ -71,8 +71,7 @@ public class MyUI extends UI {
 	}
 	
 	public String getLoggedInUsername(){
-		String returnString = (String)this.getSession().getAttribute("user");
-		return returnString;
+		return (String)this.getSession().getAttribute("user");
 	}
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

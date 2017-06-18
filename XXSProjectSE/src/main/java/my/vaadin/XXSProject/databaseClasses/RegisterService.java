@@ -46,7 +46,6 @@ public class RegisterService implements RegisterServiceInterface {
 		emf.close();
 
 		this.parentUI.getSession().setAttribute("user", inputUserName);
-//		this.parentUI.updateNavigation();
 		return true;
 	}
 

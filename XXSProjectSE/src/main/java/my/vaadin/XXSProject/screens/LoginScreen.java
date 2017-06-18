@@ -99,7 +99,15 @@ public class LoginScreen extends CssLayout {
 		});
 		btnLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnLogin.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-
+		
+		//TODO Dummy-Login entfernen
+		Button btnDummy;
+		buttons.addComponent(btnDummy = new Button("Dummy-Loggin"));
+		btnDummy.addClickListener(event ->{
+			this.parentUi.getLoginService().dummyLogIn();
+			this.parentUi.showMainView();
+		});
+		
 		buttons.addComponent(forgotPassword = new Button("Passwort vergessen?"));
 		forgotPassword.addClickListener(new Button.ClickListener() {
 			@Override
