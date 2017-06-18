@@ -34,11 +34,11 @@ public class MainScreen extends HorizontalLayout {
         navigatorMenu = new NavigatorMenu(navigator);
         navigatorMenu.addView(new OverviewView(ui), OverviewView.VIEW_NAME,
         		OverviewView.VIEW_NAME, VaadinIcons.HOME);
-        navigatorMenu.addView(new LogView(), LogView.VIEW_NAME, LogView.VIEW_NAME,
+        navigatorMenu.addView(new LogView(ui), LogView.VIEW_NAME, LogView.VIEW_NAME,
                 VaadinIcons.DATE_INPUT);
-        navigatorMenu.addView(new SettingsView(), SettingsView.VIEW_NAME, SettingsView.VIEW_NAME,
+        navigatorMenu.addView(new SettingsView(ui), SettingsView.VIEW_NAME, SettingsView.VIEW_NAME,
                 VaadinIcons.COGS);
-        navigatorMenu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
+        navigatorMenu.addView(new AboutView(ui), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
                 VaadinIcons.INFO_CIRCLE);
 
         navigator.addViewChangeListener(viewChangeListener);

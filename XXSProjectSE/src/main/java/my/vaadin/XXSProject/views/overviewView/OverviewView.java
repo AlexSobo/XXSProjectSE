@@ -68,7 +68,6 @@ public class OverviewView extends CssLayout implements View {
         centeringLayout.setComponentAlignment(contentLayout,
                 Alignment.MIDDLE_CENTER);
         this.addComponent(centeringLayout);
-
     }
 
     private VerticalLayout buildUI(){

@@ -10,11 +10,16 @@ import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+import my.vaadin.XXSProject.MyUI;
+
 public class AboutView extends VerticalLayout implements View {
 
     public static final String VIEW_NAME = "Über das Projekt";
+    
+    private MyUI parentUI;
 
-    public AboutView() {
+    public AboutView(MyUI ui) {
+    	this.parentUI = ui;
         CustomLayout aboutContent = new CustomLayout("aboutview");
         aboutContent.setStyleName("about-content");
 
