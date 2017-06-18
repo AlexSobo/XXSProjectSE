@@ -5,7 +5,6 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Viewport;
-import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -13,6 +12,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
 import my.vaadin.XXSProject.databaseClasses.LoginService;
+import my.vaadin.XXSProject.databaseEntities.User;
 import my.vaadin.XXSProject.screens.LoginScreen;
 import my.vaadin.XXSProject.screens.MainScreen;
 
@@ -30,12 +30,17 @@ import my.vaadin.XXSProject.screens.MainScreen;
 
 @Viewport("user-scalable=no,initial-scale=1.0")
 @Theme("mytheme")
+
 public class MyUI extends UI {
+	
+	private String loggedInUsername;
 	
 	private final LoginService loginService = new LoginService(this);
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+    	this.loggedInUsername = null;
+    	
         Responsive.makeResponsive(this);
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle("XXS PumperApp");
@@ -56,6 +61,12 @@ public class MyUI extends UI {
 
 	public LoginService getLoginService() {
 		return loginService;
+	}
+	
+	//Getter und Setter
+	public String getLoggedInUsername(){
+		String returnString = (String)this.getSession().getAttribute("user");
+		return returnString;
 	}
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

@@ -5,6 +5,7 @@ import com.vaadin.server.Page;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
@@ -29,12 +30,20 @@ public class LoginScreen extends CssLayout {
     private PasswordField pfPassword;
     private Button btnLogin;
     private Button forgotPassword;
+    private CheckBox boxRegistered;
     private LoginListener loginListener;
     private LoginService loginService;
 
     public LoginScreen(MyUI ui) {
-        buildUI();
-        tfUsername.focus();
+    	this.parentUi = ui;
+    	
+    	if(this.parentUi.getLoggedInUsername()==null){
+    		buildUI();
+            tfUsername.focus();
+    	} else {
+    		parentUi.get().showMainView();
+    	}
+       
     }
 
     private void buildUI() {
@@ -42,6 +51,8 @@ public class LoginScreen extends CssLayout {
 
         // login form, centered in the available part of the screen
         Component loginForm = buildLoginForm();
+        Component registerForm = buildRegisterForm();
+        
 
         // layout to center login form when there is sufficient screen space
         // - see the theme for how this is made responsive for various screen
@@ -74,10 +85,13 @@ public class LoginScreen extends CssLayout {
 		loginForm.addComponent(this.pfPassword = new PasswordField("Passwort"));
 		this.pfPassword.setWidth(15, Unit.EM);
 		this.pfPassword.setDescription("Passwort");
+		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
+		this.boxRegistered.setWidth(5, Unit.EM);
+		this.boxRegistered.setValue(true);
 		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
 		loginForm.addComponent(buttons);
-
+		
 		buttons.addComponent(btnLogin = new Button("Dummy-Login"));
 		btnLogin.addClickListener(Event -> {
 			System.out.println("Bin aktiv");
@@ -94,7 +108,13 @@ public class LoginScreen extends CssLayout {
 			}
 		});
 		forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
+		this.boxRegistered.setWidth(5, Unit.EM);
 		return loginForm;
+    }
+    
+    private Component buildRegisterForm(){
+    	this.addComponent(boxRegistered);
+    	return null;
     }
 
     private CssLayout buildLoginInformation() {
@@ -111,7 +131,7 @@ public class LoginScreen extends CssLayout {
     
 	// Action, wenn Dummy-Login Button gedrückt wird
 	private void btnDummyLoginWasClicked() {
-		System.out.println("dummyMEthode");
+		System.out.println("dummyMethode");
 		parentUi.getLoginService().dummyLogIn();
 		parentUi.get().showMainView();
 	}
