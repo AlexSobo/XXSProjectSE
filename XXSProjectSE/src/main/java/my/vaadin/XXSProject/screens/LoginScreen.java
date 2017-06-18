@@ -26,13 +26,16 @@ import my.vaadin.XXSProject.databaseClasses.LoginService;
 public class LoginScreen extends CssLayout {
 
 	private MyUI parentUi;
-    private TextField tfUsername;
-    private PasswordField pfPassword;
-    private Button btnLogin;
+    private TextField tfUsername, tfFirstName, tfLastName, tfEmail;
+    private PasswordField pfPassword, pfPasswortRepeat;
+    private Button btnLogin, btnRegister;
     private Button forgotPassword;
     private CheckBox boxRegistered;
     private LoginListener loginListener;
     private LoginService loginService;
+    private VerticalLayout centeringLayout;
+    private Component loginForm;
+    private Component registerForm;
 
     public LoginScreen(MyUI ui) {
     	this.parentUi = ui;
@@ -50,14 +53,13 @@ public class LoginScreen extends CssLayout {
         addStyleName("login-screen");
 
         // login form, centered in the available part of the screen
-        Component loginForm = buildLoginForm();
-        Component registerForm = buildRegisterForm();
+        loginForm = buildLoginForm();
         
 
         // layout to center login form when there is sufficient screen space
         // - see the theme for how this is made responsive for various screen
         // sizes
-        VerticalLayout centeringLayout = new VerticalLayout();
+        centeringLayout = new VerticalLayout();
         centeringLayout.setMargin(false);
         centeringLayout.setSpacing(false);
         centeringLayout.setStyleName("centering-layout");
@@ -70,6 +72,8 @@ public class LoginScreen extends CssLayout {
 
         addComponent(centeringLayout);
         addComponent(loginInformation);
+
+        registerForm = buildRegisterForm();
     }
 
     private Component buildLoginForm() {
@@ -79,18 +83,19 @@ public class LoginScreen extends CssLayout {
 		loginForm.addStyleName("login-form");
 		loginForm.setSizeUndefined();
 		loginForm.setMargin(false);
-
 		loginForm.addComponent(this.tfUsername = new TextField("Benutzername"));
 		this.tfUsername.setWidth(15, Unit.EM);
 		loginForm.addComponent(this.pfPassword = new PasswordField("Passwort"));
 		this.pfPassword.setWidth(15, Unit.EM);
 		this.pfPassword.setDescription("Passwort");
-		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
-		this.boxRegistered.setWidth(5, Unit.EM);
-		this.boxRegistered.setValue(true);
 		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
 		loginForm.addComponent(buttons);
+		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
+		this.boxRegistered.setValue(true);
+		this.boxRegistered.addValueChangeListener(event->{
+			this.checkBoxValueChanged();
+		});
 		
 		buttons.addComponent(btnLogin = new Button("Dummy-Login"));
 		btnLogin.addClickListener(Event -> {
@@ -108,13 +113,24 @@ public class LoginScreen extends CssLayout {
 			}
 		});
 		forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
-		this.boxRegistered.setWidth(5, Unit.EM);
 		return loginForm;
     }
     
     private Component buildRegisterForm(){
-    	this.addComponent(boxRegistered);
-    	return null;
+    	FormLayout registerForm = new FormLayout();
+    	registerForm.addStyleName("login-form");
+    	registerForm.setSizeUndefined();
+    	registerForm.setMargin(false);
+    	registerForm.addComponent(tfUsername);
+    	registerForm.addComponent(this.tfFirstName = new TextField("Vorname"));
+    	this.tfFirstName.setWidth(15, Unit.EM);
+    	registerForm.addComponent(this.tfLastName = new TextField("Nachname"));
+    	this.tfLastName.setWidth(15, Unit.EM);
+    	registerForm.addComponent(pfPassword);
+    	registerForm.addComponent(this.pfPasswortRepeat = new PasswordField("Passwort wiederholen"));
+    	this.pfPasswortRepeat.setWidth(15, Unit.EM);
+    	this.pfPasswortRepeat.setDescription("Passwort wiederholen");
+    	return registerForm;
     }
 
     private CssLayout buildLoginInformation() {
@@ -135,7 +151,18 @@ public class LoginScreen extends CssLayout {
 		parentUi.getLoginService().dummyLogIn();
 		parentUi.get().showMainView();
 	}
-
+	
+	private void checkBoxValueChanged(){
+		if(this.boxRegistered.getValue()){
+			this.centeringLayout.removeAllComponents();
+			this.centeringLayout.addComponent(this.loginForm);
+		} else{
+			this.centeringLayout.removeAllComponents();
+			this.centeringLayout.addComponent(this.registerForm);
+			centeringLayout.setComponentAlignment(registerForm,
+	                Alignment.MIDDLE_CENTER);
+		}
+	}
 
     private void showNotification(Notification notification) {
         // keep the notification visible a little while after moving the
