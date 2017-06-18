@@ -12550,6 +12550,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 100%;
 	height: 100%;
 	padding-left: 300px;
+	overflow: auto;
 }
 
 .mytheme .login-screen .centering-layout .v-slot {
@@ -12957,7 +12958,7 @@ div.v-layout.v-horizontal.v-widget {
 	border: 1px solid #d5d5d5;
 	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
-	max-width: 500px;
+	max-width: 700px;
 	padding: 32px !important;
 }
 

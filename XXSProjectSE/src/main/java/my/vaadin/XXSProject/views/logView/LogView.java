@@ -36,7 +36,7 @@ public class LogView extends CssLayout implements View {
 	public LogView(MyUI ui) {
 		this.parentUI = ui;
 		setSizeFull();
-		addStyleName("crud-view");
+		addStyleName("about-content");
 
 		VerticalLayout centeringLayout = new VerticalLayout();
 		centeringLayout.setMargin(false);
@@ -51,7 +51,7 @@ public class LogView extends CssLayout implements View {
 
 	private VerticalLayout buildUI() {
 		VerticalLayout contentLayout = new VerticalLayout();
-		addStyleName("log-view");
+		addStyleName("about-view");
 
 		logShowDisplay = new LogShowDisplay();
 		contentLayout.addComponent(logShowDisplay);

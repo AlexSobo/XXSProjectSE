@@ -23,12 +23,15 @@ public class AboutView extends VerticalLayout implements View {
         CustomLayout aboutContent = new CustomLayout("aboutview");
         aboutContent.setStyleName("about-content");
 
-        // you can add Vaadin components in predefined slots in the custom
-        // layout
         aboutContent.addComponent(
                 new Label(VaadinIcons.INFO_CIRCLE.getHtml()
-                        + " Diese Webanwendung wurde mit Vaadin erstellt! "
-                        + Version.getFullVersion(), ContentMode.HTML), "info");
+                        + "<p>HTML-Frontend (Design mit CSS, responsive)</p>"
+                        + "<p>Öffentlicher und geschützter Anwendungs-Bereich (Registrierung, Login)</p>"
+                        + "<p>Darstellung / Einbindung von Inhalten aus einer Datenbank</p>"
+                        + "<p>Bereitstellung eines Webservices</p>"
+                        + "<p>Nutzung eines Webservices im Frontend mit AJAX</p>"
+                        + "<p>Entwurf / Dokumentation der Anwendung mit Methoden des Software-Engineerings</p>"
+                        + "<p>Installationsbeschreibung (Deployment, Konfiguration, ggf. Testdaten)</p>", ContentMode.HTML), "info");
 
         setSizeFull();
         setMargin(false);

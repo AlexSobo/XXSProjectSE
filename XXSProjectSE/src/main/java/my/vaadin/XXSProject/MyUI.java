@@ -18,14 +18,14 @@ import my.vaadin.XXSProject.screens.LoginScreen;
 import my.vaadin.XXSProject.screens.MainScreen;
 
 /**
- * Herlich Willkommen im Herzstück der XXS-Pumperapp!
+ * Herzlich Willkommen im Herzstück der XXS-Pumperapp!
  * 
- * Dies ist die Hauptklasse der Applikation, die das Layout bildet und initial prüft, 
- * ob ein User eingeloggt ist. Ist dies der Fall, startet der Mainscreen der Applikation, 
- * andernfalls öffnet sich Startbildschirm, auf dem man sich einloggen bzw. registrieren kann
+ * Dies ist die Hauptklasse der Applikation, die das Layout bildet und zum LoginScreen weiterleitet.
+ * Im LoginScreen wird überprüft, ob ein Nutzer eingeloggt ist.
+ * Ist dies der Fall, startet der Mainscreen der Applikation (showMainView).
  *
  * @Viewport sorgt automatisch für eine richtige Skalierung auf kleinen Geräten.
- * FÜr das Theming wird die Vaadin Integration Valo verwendet.
+ * Für das Theming wird die Vaadin Integration Valo verwendet.
  **/
 
 
@@ -47,7 +47,6 @@ public class MyUI extends UI {
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle("XXS PumperApp");
         setContent(new LoginScreen(this));
-//        showMainView();
         
     }
 

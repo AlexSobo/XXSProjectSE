@@ -21,63 +21,60 @@ import my.vaadin.XXSProject.databaseClasses.LoginService;
 import my.vaadin.XXSProject.views.overviewView.OverviewView;
 
 /**
- * UI content when the user is not logged in yet.
+ * LoginScreen + Überprüfung der Logindaten.
  */
 public class LoginScreen extends CssLayout {
 
 	private MyUI parentUi;
-    private TextField tfUsername, tfUsernameNew, tfFirstName, tfLastName, tfEmail;
-    private PasswordField pfPassword, pfPasswordNew, pfPasswortRepeat;
-    private Button btnLogin, btnRegister;
-    private Button forgotPassword;
-    private CheckBox boxRegistered;
-    private LoginListener loginListener;
-    private LoginService loginService;
-    private VerticalLayout centeringLayout;
-    private FormLayout loginForm;
-    private FormLayout registerForm;
+	private TextField tfUsername, tfUsernameNew, tfFirstName, tfLastName, tfEmail;
+	private PasswordField pfPassword, pfPasswordNew, pfPasswortRepeat;
+	private Button btnLogin, btnRegister;
+	private Button forgotPassword;
+	private CheckBox boxRegistered;
+	private LoginListener loginListener;
+	private LoginService loginService;
+	private VerticalLayout centeringLayout;
+	private FormLayout loginForm;
+	private FormLayout registerForm;
 
-    public LoginScreen(MyUI ui) {
-    	this.parentUi = ui;
-    	this.loginService = parentUi.getLoginService();
-    	
-    	if(this.parentUi.getLoggedInUsername()==null){
-    		buildUI();
-            tfUsername.focus();
-    	} else {
-    		parentUi.get().showMainView();
-    	}
-       
-    }
+	public LoginScreen(MyUI ui) {
+		this.parentUi = ui;
+		this.loginService = parentUi.getLoginService();
 
-    private void buildUI() {
-        addStyleName("login-screen");
+		if (this.parentUi.getLoggedInUsername() == null) {
+			buildUI();
+			tfUsername.focus();
+		} else {
+			parentUi.get().showMainView();
+		}
 
-        // login form, centered in the available part of the screen
-        loginForm = buildLoginForm();
-        
+	}
 
-        // layout to center login form when there is sufficient screen space
-        // - see the theme for how this is made responsive for various screen
-        // sizes
-        centeringLayout = new VerticalLayout();
-        centeringLayout.setMargin(false);
-        centeringLayout.setSpacing(false);
-        centeringLayout.setStyleName("centering-layout");
-        centeringLayout.addComponent(loginForm);
-        centeringLayout.setComponentAlignment(loginForm,
-                Alignment.MIDDLE_CENTER);
+	private void buildUI() {
+		addStyleName("login-screen");
 
-        // information text about logging in
-        CssLayout loginInformation = buildLoginInformation();
+		// Aufbau der zwei Formulare für Login und Registrierung
+		loginForm = buildLoginForm();
+		registerForm = buildRegisterForm();
 
-        addComponent(centeringLayout);
-        addComponent(loginInformation);
+		// Erstellen eines Layouts, um den Inhalt zu zentrieren
+		centeringLayout = new VerticalLayout();
+		centeringLayout.setMargin(false);
+		centeringLayout.setSpacing(false);
+		centeringLayout.setStyleName("centering-layout");
+		centeringLayout.addComponent(loginForm);
+		centeringLayout.setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
 
-        registerForm = buildRegisterForm();
-    }
+		// Layout mit Informationen zum Login
+		CssLayout loginInformation = buildLoginInformation();
 
-    private FormLayout buildLoginForm() {
+		// Hinzufügen der Layouts zum LoginScreen
+		addComponent(centeringLayout);
+		addComponent(loginInformation);
+
+	}
+
+	private FormLayout buildLoginForm() {
 
 		FormLayout loginForm = new FormLayout();
 
@@ -88,90 +85,89 @@ public class LoginScreen extends CssLayout {
 		this.tfUsername.setWidth(15, Unit.EM);
 		loginForm.addComponent(this.pfPassword = new PasswordField("Passwort"));
 		this.pfPassword.setWidth(15, Unit.EM);
-		this.pfPassword.setDescription("Passwort");
 		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
-		
+
 		buttons.addComponent(btnLogin = new Button("Login"));
 		btnLogin.addClickListener(Event -> {
-			System.out.println("Bin aktiv");
 			btnLoginWasClicked();
 		});
 		btnLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnLogin.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-		
-		//TODO Dummy-Login entfernen
+
+		// TODO Dummy-Login entfernen
 		Button btnDummy;
 		buttons.addComponent(btnDummy = new Button("Dummy-Loggin"));
-		btnDummy.addClickListener(event ->{
+		btnDummy.addClickListener(event -> {
 			this.parentUi.getLoginService().dummyLogIn();
 			this.parentUi.showMainView();
 		});
-		
+		btnDummy.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+
 		buttons.addComponent(forgotPassword = new Button("Passwort vergessen?"));
 		forgotPassword.addClickListener(new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent event) {
-				showNotification(new Notification("Haha gibt keine Funktion zum Zurücksetzen!"));
+				showNotification(new Notification("tbd!"));
 			}
 		});
 		forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
-		
+
 		loginForm.addComponent(buttons);
 		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
 		this.boxRegistered.setValue(true);
-		this.boxRegistered.addValueChangeListener(event->{
+		this.boxRegistered.addValueChangeListener(event -> {
 			this.checkBoxValueChanged();
 		});
-		
+
 		return loginForm;
-    }
-    
-    private FormLayout buildRegisterForm(){
-    	FormLayout registerForm = new FormLayout();
-    	registerForm.addStyleName("login-form");
-    	registerForm.setSizeUndefined();
-    	registerForm.setMargin(false);
-    	registerForm.addComponent(this.tfUsernameNew = new TextField("Benutzername"));
+	}
+
+	private FormLayout buildRegisterForm() {
+		
+		FormLayout registerForm = new FormLayout();
+		
+		registerForm.addStyleName("login-form");
+		registerForm.setSizeUndefined();
+		registerForm.setMargin(false);
+		registerForm.addComponent(this.tfUsernameNew = new TextField("Benutzername"));
 		this.tfUsernameNew.setWidth(15, Unit.EM);
-		registerForm.addComponent(this.tfEmail = new TextField("Benutzername"));
+		registerForm.addComponent(this.tfEmail = new TextField("E-Mail"));
 		this.tfEmail.setWidth(15, Unit.EM);
-    	registerForm.addComponent(this.tfFirstName = new TextField("Vorname"));
-    	this.tfFirstName.setWidth(15, Unit.EM);
-    	registerForm.addComponent(this.tfLastName = new TextField("Nachname"));
-    	this.tfLastName.setWidth(15, Unit.EM);
-    	registerForm.addComponent(this.pfPasswordNew = new PasswordField("Passwort"));
+		registerForm.addComponent(this.tfFirstName = new TextField("Vorname"));
+		this.tfFirstName.setWidth(15, Unit.EM);
+		registerForm.addComponent(this.tfLastName = new TextField("Nachname"));
+		this.tfLastName.setWidth(15, Unit.EM);
+		registerForm.addComponent(this.pfPasswordNew = new PasswordField("Passwort"));
 		this.pfPasswordNew.setWidth(15, Unit.EM);
-		this.pfPasswordNew.setDescription("Passwort");
-    	registerForm.addComponent(this.pfPasswortRepeat = new PasswordField("Passwort wiederholen"));
-    	this.pfPasswortRepeat.setWidth(15, Unit.EM);
-    	this.pfPasswortRepeat.setDescription("Passwort wiederholen");
-    	
-    	CssLayout buttons = new CssLayout();
+		registerForm.addComponent(this.pfPasswortRepeat = new PasswordField("Passwort wiederholen"));
+		this.pfPasswortRepeat.setWidth(15, Unit.EM);
+
+		CssLayout buttons = new CssLayout();
 		buttons.setStyleName("buttons");
 		buttons.addComponent(this.btnRegister = new Button("Registrieren"));
 		btnRegister.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnRegister.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-		btnRegister.addClickListener(event ->{
+		btnRegister.addClickListener(event -> {
 			this.btnRegisterWasClicked();
 		});
 		registerForm.addComponent(buttons);
-		
-    	return registerForm;
-    }
 
-    private CssLayout buildLoginInformation() {
-        CssLayout loginInformation = new CssLayout();
-        loginInformation.setStyleName("login-information");
-        Label loginInfoText = new Label(
-                "<h1>XXS PumperApp - Ein Projekt von Felix, Alex und Dennis</h1>"
-                        + "Für einen uneingeschränkten Zugang, logge dich mit &quot;admin&quot; ein. Mit jedem anderen Benutzernamen erhältst du Zugang mit Leserechten. Für alle Nutzer ist kein Passwort erforderlich!",
-                ContentMode.HTML);
-        loginInfoText.setSizeFull();
-        loginInformation.addComponent(loginInfoText);
-        return loginInformation;
-    }
-    
+		return registerForm;
+	}
+
+	private CssLayout buildLoginInformation() {
+		CssLayout loginInformation = new CssLayout();
+		loginInformation.setStyleName("login-information");
+		Label loginInfoText = new Label(
+				"<h1>XXS PumperApp</h1>"
+						+ "Ein Projekt von Felix, Alex und Dennis",
+				ContentMode.HTML);
+		loginInfoText.setSizeFull();
+		loginInformation.addComponent(loginInfoText);
+		return loginInformation;
+	}
+
 	// Action, wenn Login-Button gedrückt wird
 	private void btnLoginWasClicked() {
 		if (this.tfUsername.getValue().equals("") || this.pfPassword.getValue().equals("")) {
@@ -181,31 +177,28 @@ public class LoginScreen extends CssLayout {
 			if (this.parentUi.getLoginService().logIn(this.tfUsername.getValue(), pfPassword.getValue())) {
 				parentUi.get().showMainView();
 			} else {
-				showNotification(new Notification("Benutzername und Passwort nicht bekannt!"));
+				showNotification(new Notification("Benutzername und/oder Passwort nicht bekannt!"));
 			}
-		}		
+		}
 	}
-	
+
 	// Action, wenn Checkbox Wert ändert
-	private void checkBoxValueChanged(){
-		if(this.boxRegistered.getValue()){
+	private void checkBoxValueChanged() {
+		if (this.boxRegistered.getValue()) {
 			this.centeringLayout.removeAllComponents();
 			this.centeringLayout.addComponent(this.loginForm);
 			this.loginForm.addComponent(this.boxRegistered);
-			centeringLayout.setComponentAlignment(loginForm,
-	                Alignment.MIDDLE_CENTER);
-		} else{
+			centeringLayout.setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
+		} else {
 			this.centeringLayout.removeAllComponents();
 			this.centeringLayout.addComponent(this.registerForm);
 			this.registerForm.addComponent(this.boxRegistered);
-			centeringLayout.setComponentAlignment(registerForm,
-	                Alignment.MIDDLE_CENTER);
+			centeringLayout.setComponentAlignment(registerForm, Alignment.MIDDLE_CENTER);
 		}
 	}
-	
-	// Action, wenn Registrierungs-Button gedrückt wird
-	private void btnRegisterWasClicked(){
 
+	// Action, wenn Registrierungs-Button gedrückt wird
+	private void btnRegisterWasClicked() {
 
 		// Test, ob Daten vollständig eingegeben
 		if (tfUsernameNew.getValue().equals("") || tfEmail.getValue().equals("") || tfFirstName.getValue().equals("")
@@ -225,14 +218,12 @@ public class LoginScreen extends CssLayout {
 				showNotification(new Notification("Daten bereits vorhanden!"));
 			}
 		}
-	
+
 	}
 
-    private void showNotification(Notification notification) {
-        // keep the notification visible a little while after moving the
-        // mouse, or until clicked
-        notification.setDelayMsec(2000);
-        notification.show(Page.getCurrent());
-    }
+	private void showNotification(Notification notification) {
+		notification.setDelayMsec(2000);
+		notification.show(Page.getCurrent());
+	}
 
 }
