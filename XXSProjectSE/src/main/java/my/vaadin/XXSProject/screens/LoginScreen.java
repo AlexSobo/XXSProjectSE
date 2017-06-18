@@ -38,6 +38,7 @@ public class LoginScreen extends CssLayout {
     private FormLayout registerForm;
 
     public LoginScreen(MyUI ui) {
+    	this.loginService = new LoginService(parentUi);
     	this.parentUi = ui;
     	
     	if(this.parentUi.getLoggedInUsername()==null){
@@ -94,7 +95,7 @@ public class LoginScreen extends CssLayout {
 		buttons.addComponent(btnLogin = new Button("Dummy-Login"));
 		btnLogin.addClickListener(Event -> {
 			System.out.println("Bin aktiv");
-			btnDummyLoginWasClicked();
+			btnLoginWasClicked();
 		});
 		btnLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnLogin.addStyleName(ValoTheme.BUTTON_FRIENDLY);
@@ -142,7 +143,7 @@ public class LoginScreen extends CssLayout {
 		btnRegister.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnRegister.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		btnRegister.addClickListener(event ->{
-			
+			this.btnRegisterWasClicked();
 		});
 		registerForm.addComponent(buttons);
 		
@@ -161,13 +162,25 @@ public class LoginScreen extends CssLayout {
         return loginInformation;
     }
     
-	// Action, wenn Dummy-Login Button gedrückt wird
-	private void btnDummyLoginWasClicked() {
-		System.out.println("dummyMethode");
-		parentUi.getLoginService().dummyLogIn();
-		parentUi.get().showMainView();
+	// Action, wenn Login-Button gedrückt wird
+	private void btnLoginWasClicked() {
+		if (this.tfUsername.getValue().equals("") || this.pfPassword.getValue().equals("")) {
+			showNotification(new Notification("Daten unvollständig eingegeben!"));
+		} else {
+			// Check, ob Username und Passwort in Datenbank vorhanden
+			if (this.parentUi.getLoginService().logIn(this.tfUsername.getValue(), pfPassword.getValue())) {
+				parentUi.get().showMainView();
+			} else {
+				showNotification(new Notification("Benutzername und Passwort nicht bekannt!"));
+			}
+		}
+		
+//		System.out.println("dummyMethode");
+//		parentUi.getLoginService().dummyLogIn();
+		
 	}
 	
+	// Action, wenn Checkbox Wert ändert
 	private void checkBoxValueChanged(){
 		if(this.boxRegistered.getValue()){
 			this.centeringLayout.removeAllComponents();
@@ -184,6 +197,7 @@ public class LoginScreen extends CssLayout {
 		}
 	}
 	
+	// Action, wenn Registrierungs-Button gedrückt wird
 	private void btnRegisterWasClicked(){
 		System.out.println("Aktiv");
 	}
