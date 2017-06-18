@@ -23,6 +23,8 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
+import my.vaadin.XXSProject.views.overviewView.OverviewView;
+
 /**
  * Responsive Navigationsmenü mit den verschiedenen Views.
  */
@@ -91,7 +93,7 @@ public class NavigatorMenu extends CssLayout {
         menuItemsLayout = new CssLayout();
         menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
         menuPart.addComponent(menuItemsLayout);
-
+        
         addComponent(menuPart);
     }
 

@@ -40,9 +40,12 @@ public class MainScreen extends HorizontalLayout {
                 VaadinIcons.COGS);
         navigatorMenu.addView(new AboutView(ui), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
                 VaadinIcons.INFO_CIRCLE);
-
+         
         navigator.addViewChangeListener(viewChangeListener);
-
+        
+        navigator.navigateTo(OverviewView.VIEW_NAME);
+        navigatorMenu.setActiveView(OverviewView.VIEW_NAME);
+        
         addComponent(navigatorMenu);
         addComponent(viewContainer);
         setExpandRatio(viewContainer, 1);
