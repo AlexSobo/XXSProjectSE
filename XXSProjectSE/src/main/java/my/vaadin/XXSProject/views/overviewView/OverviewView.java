@@ -7,12 +7,14 @@ import java.util.Set;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 import my.vaadin.XXSProject.MyUI;
 import my.vaadin.XXSProject.databaseClasses.ExercisesTableConnector;
@@ -56,6 +58,22 @@ public class OverviewView extends CssLayout implements View {
         setSizeFull();
         addStyleName("crud-view");
         
+        VerticalLayout centeringLayout = new VerticalLayout();
+        centeringLayout.setMargin(false);
+        centeringLayout.setSpacing(false);
+        VerticalLayout contentLayout = new VerticalLayout();
+        contentLayout = this.buildUI();
+        centeringLayout.setStyleName("centering-layout");
+        centeringLayout.addComponent(contentLayout);
+        centeringLayout.setComponentAlignment(contentLayout,
+                Alignment.MIDDLE_CENTER);
+        this.addComponent(centeringLayout);
+
+    }
+
+    private VerticalLayout buildUI(){
+    	VerticalLayout contentLayout = new VerticalLayout();
+    	       
 		//Initialisierung der UI-Elemente
 		this.gridWorkouts = new Grid<>();
 		this.gridWorkouts.setCaption("Trainingspläne");
@@ -81,9 +99,7 @@ public class OverviewView extends CssLayout implements View {
 		this.tfAddExerciseTargWeights = new TextField("Neue Übung Gewicht");
 		this.btnAddExercise = new Button("Übung hinzufügen");
 		this.btnRmvExercise = new Button("Ausgewählte Übung löschen");
-
-		this.setCaption("Kein Plan ausgewählt");
-
+		
 		this.workoutPlanCreater = new WorkoutPlanTableConnector();
 		this.newWorkout = null;
 		
@@ -107,7 +123,6 @@ public class OverviewView extends CssLayout implements View {
 						this.getParentUI().getLoggedInUsername(), selectedPlanName);
 
 				// Exercise-Grid-Layout intialisieren
-				this.setCaption("Plan: " + selectedPlanName);
 				this.gridExercises.setItems(this.existingExercises);
 				this.gridExercises.addColumn(Exercise::getName).setCaption("Name");
 				this.gridExercises.addColumn(Exercise::getTargetReps).setCaption("Wiederholungen Ziel");
@@ -116,8 +131,6 @@ public class OverviewView extends CssLayout implements View {
 				if (this.existingExercises.size() != 0) {
 					this.gridExercises.setHeightByRows(this.existingExercises.size());
 				}
-			} else {
-				this.gridExercises.setCaption("Kein Plan ausgewählt");
 			}
 		});
 
@@ -294,14 +307,25 @@ public class OverviewView extends CssLayout implements View {
 			}
 		});
 
+		// Komponenten final zu Layout hinzufügen
+		contentLayout.addComponent(gridWorkouts);
+		contentLayout.addComponent(tfAddWorkoutPlanName);
+		contentLayout.addComponent(tfAddWorkoutPlanDesc);
+		contentLayout.addComponent(btnAddWorkoutPlan);
+		contentLayout.addComponent(btnRmvWorkoutPlan);
+		contentLayout.addComponent(gridExercises);
+		contentLayout.addComponent(tfAddExerciseName);
+		contentLayout.addComponent(tfAddExerciseTargReps);
+		contentLayout.addComponent(tfAddExerciseTargSets);
+		contentLayout.addComponent(tfAddExerciseTargWeights);
+		contentLayout.addComponent(btnAddExercise);
+		contentLayout.addComponent(btnRmvExercise);
+    	
+    	return contentLayout;
     }
-
-
 
     @Override
     public void enter(ViewChangeEvent event) {
-
-		this.setCaption("Kein Plan ausgewählt");
 		// Workout-Grid laden
 		this.existingWorkouts = new ArrayList<>();
 		WorkoutPlanTableConnector workoutProvider = new WorkoutPlanTableConnector();
@@ -317,20 +341,6 @@ public class OverviewView extends CssLayout implements View {
 		if (this.existingWorkouts.size() != 0) {
 			this.gridWorkouts.setHeightByRows(this.existingWorkouts.size());
 		}
-	
-		// Komponenten final zu Layout hinzufügen
-		this.addComponent(gridWorkouts);
-		this.addComponent(tfAddWorkoutPlanName);
-		this.addComponent(tfAddWorkoutPlanDesc);
-		this.addComponent(btnAddWorkoutPlan);
-		this.addComponent(btnRmvWorkoutPlan);
-		this.addComponent(gridExercises);
-		this.addComponent(tfAddExerciseName);
-		this.addComponent(tfAddExerciseTargReps);
-		this.addComponent(tfAddExerciseTargSets);
-		this.addComponent(tfAddExerciseTargWeights);
-		this.addComponent(btnAddExercise);
-		this.addComponent(btnRmvExercise);
 	
     }
     
