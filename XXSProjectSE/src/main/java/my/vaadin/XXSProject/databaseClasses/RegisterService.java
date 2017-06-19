@@ -38,7 +38,8 @@ public class RegisterService implements RegisterServiceInterface {
 		}
 
 		// Schritt 2: Einschreiben und einloggen des Users
-		User newUser = new User(inputUserName, String.valueOf(inputPassword.hashCode()), inputFirstName, inputLastName, inputEmailAddress);
+		User newUser = new User(inputUserName, String.valueOf(inputPassword.hashCode()), inputFirstName, inputLastName,
+				inputEmailAddress);
 		em.getTransaction().begin();
 		em.persist(newUser);
 		em.getTransaction().commit();

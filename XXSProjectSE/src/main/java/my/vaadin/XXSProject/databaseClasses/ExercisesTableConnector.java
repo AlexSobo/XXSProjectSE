@@ -19,7 +19,7 @@ public class ExercisesTableConnector implements ExercisesTableConnectorInterface
 
 		List<Exercise> databaseExercises = em.createQuery("SELECT e FROM exercises e WHERE e.fkUsername = '" + username
 				+ "' AND e.fkWorkoutplanName = '" + workoutplanName + "'").getResultList();
-		
+
 		return databaseExercises;
 	}
 
@@ -31,7 +31,7 @@ public class ExercisesTableConnector implements ExercisesTableConnectorInterface
 		em.getTransaction().begin();
 		em.persist(newExercise);
 		em.getTransaction().commit();
-		
+
 		em.clear();
 		em.close();
 		emf.close();
@@ -60,7 +60,8 @@ public class ExercisesTableConnector implements ExercisesTableConnectorInterface
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
-		em.createQuery("DELETE FROM exercises e WHERE e.fkUsername = '" + username + "' AND e.fkWorkoutplanName='"+ planName+"'").executeUpdate();
+		em.createQuery("DELETE FROM exercises e WHERE e.fkUsername = '" + username + "' AND e.fkWorkoutplanName='"
+				+ planName + "'").executeUpdate();
 		em.getTransaction().commit();
 
 		em.clear();

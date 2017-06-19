@@ -14,7 +14,7 @@ public class XXSWebServer {
 	public static void main(String[] args) {
 		HttpServer server = null;
 		try {
-			server = HttpServerFactory.create( "http://localhost:8081/rest" );
+			server = HttpServerFactory.create("http://localhost:8081/rest");
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			System.out.println("Eingegebene Daten invalide für Webservice");

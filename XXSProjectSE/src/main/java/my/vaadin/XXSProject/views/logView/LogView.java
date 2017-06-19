@@ -37,7 +37,7 @@ public class LogView extends CssLayout implements View {
 	public LogView(MyUI ui) {
 		this.parentUI = ui;
 		setSizeFull();
-		addStyleName("crud-view");
+		addStyleName("about-content");
 
 		VerticalLayout centeringLayout = new VerticalLayout();
 		centeringLayout.setMargin(false);
@@ -54,14 +54,14 @@ public class LogView extends CssLayout implements View {
 
 	private VerticalLayout buildUI() {
 		VerticalLayout contentLayout = new VerticalLayout();
-		addStyleName("log-view");
+		addStyleName("about-view");
 
 		logShowDisplay = new LogShowDisplay();
 		contentLayout.addComponent(logShowDisplay);
 
-		 this.logShowChart = new LogShowChart();
-		 this.logShowChart.setWidth(50, Unit.EM);
-		 contentLayout.addComponent(logShowChart);
+		this.logShowChart = new LogShowChart();
+		this.logShowChart.setWidth(50, Unit.EM);
+		contentLayout.addComponent(logShowChart);
 
 		selectPlan = new NativeSelect<>("Logs hinzufügen");
 		selectPlan.setEmptySelectionAllowed(false);
@@ -72,9 +72,9 @@ public class LogView extends CssLayout implements View {
 
 		// Action-Listener - Workoutplan wird ausgewählt
 		this.selectPlan.addSelectionListener(e -> {
-			 this.selectedWorkoutPlanChanged();
+			this.selectedWorkoutPlanChanged();
 		});
-		
+
 		return contentLayout;
 	}
 
@@ -83,10 +83,11 @@ public class LogView extends CssLayout implements View {
 		this.logShowDisplay.showLogsForExersice(exerciseToShow);
 		this.logShowChart.showLogsForExercise(exerciseToShow);
 	}
-	
+
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet ist
+		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet
+		// ist
 
 		// Daten für Plan-Select laden
 		WorkoutPlanTableConnector workoutPlanProvider = new WorkoutPlanTableConnector();
@@ -98,7 +99,6 @@ public class LogView extends CssLayout implements View {
 		}
 
 	}
-
 
 	// WorkoutPlan wird ausgewählt
 	private void selectedWorkoutPlanChanged() {

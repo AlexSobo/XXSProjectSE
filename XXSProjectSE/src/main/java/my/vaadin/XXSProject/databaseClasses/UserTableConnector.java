@@ -60,8 +60,8 @@ public class UserTableConnector implements UserTableConnectorInterface {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		User updatedUser = em.find(User.class, userName);
-		System.out.println("Feldwert als Hash: "+oldPassword.getValue());
-		System.out.println("UpdatedUser Passwort: "+updatedUser.getPassword());
+		System.out.println("Feldwert als Hash: " + oldPassword.getValue());
+		System.out.println("UpdatedUser Passwort: " + updatedUser.getPassword());
 		if (String.valueOf(oldPassword.getValue().hashCode()).equals(updatedUser.getPassword())
 				&& newPassword.getValue().equals(repeatPassword.getValue())) {
 			updatedUser.setPassword(String.valueOf(newPassword.getValue().hashCode()));

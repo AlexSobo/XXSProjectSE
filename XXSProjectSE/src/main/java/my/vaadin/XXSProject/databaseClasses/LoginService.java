@@ -42,14 +42,15 @@ public class LoginService implements LoginServiceInterface {
 
 		// Abgleich eingegebener Daten mit Datenbank-Bestand
 		for (User u : databaseUsers) {
-			if (u.getUsername().equals(inputUserName) && u.getPassword().equals(String.valueOf(inputPassword.hashCode()))) {
+			if (u.getUsername().equals(inputUserName)
+					&& u.getPassword().equals(String.valueOf(inputPassword.hashCode()))) {
 				this.loggedInUser = u;
 				this.get().getSession().setAttribute("user", inputUserName);
 				em.clear();
 				em.close();
 				emf.close();
 				return true;
-			} 
+			}
 		}
 		return false;
 

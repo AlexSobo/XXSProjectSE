@@ -21,11 +21,11 @@ public class LogTableConnector implements LogTableConnectorInterface {
 		List<Log> databaseLogs = em.createQuery("SELECT l FROM logs l WHERE l.fkUsername = '" + username
 				+ "' AND l.fkWorkoutplan='" + workoutPlanName + "' AND l.fkExercisename='" + exerciseName + "'")
 				.getResultList();
-		
+
 		em.clear();
 		em.close();
 		emf.close();
-		
+
 		return databaseLogs;
 	}
 
@@ -37,7 +37,7 @@ public class LogTableConnector implements LogTableConnectorInterface {
 		em.getTransaction().begin();
 		em.persist(logToAdd);
 		em.getTransaction().commit();
-		
+
 		em.clear();
 		em.close();
 		emf.close();
@@ -50,8 +50,9 @@ public class LogTableConnector implements LogTableConnectorInterface {
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
-		em.createQuery("DELETE FROM logs l WHERE l.fkUsername = '" + username + "' AND l.fkWorkoutplan='"
-				+ workoutPlan+"'").executeUpdate();
+		em.createQuery(
+				"DELETE FROM logs l WHERE l.fkUsername = '" + username + "' AND l.fkWorkoutplan='" + workoutPlan + "'")
+				.executeUpdate();
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -63,8 +64,8 @@ public class LogTableConnector implements LogTableConnectorInterface {
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
-		em.createQuery("DELETE FROM logs l WHERE l.fkUsername = '" + username + "' AND l.fkWorkoutplan='"
-				+ workoutPlan + "' AND l.fkExercisename='" + Exercise + "'").executeUpdate();
+		em.createQuery("DELETE FROM logs l WHERE l.fkUsername = '" + username + "' AND l.fkWorkoutplan='" + workoutPlan
+				+ "' AND l.fkExercisename='" + Exercise + "'").executeUpdate();
 		em.getTransaction().commit();
 		em.clear();
 		em.close();
