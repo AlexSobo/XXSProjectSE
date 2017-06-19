@@ -7,6 +7,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
@@ -43,8 +44,10 @@ public class LogView extends CssLayout implements View {
 		centeringLayout.setSpacing(false);
 		VerticalLayout contentLayout = new VerticalLayout();
 		contentLayout = this.buildUI();
+		VerticalLayout secondLayout = new VerticalLayout();
 		centeringLayout.setStyleName("centering-layout");
 		centeringLayout.addComponent(contentLayout);
+		centeringLayout.addComponent(secondLayout);
 		centeringLayout.setComponentAlignment(contentLayout, Alignment.MIDDLE_CENTER);
 		this.addComponent(centeringLayout);
 	}
@@ -130,7 +133,6 @@ public class LogView extends CssLayout implements View {
 
 			Notification.show("Keine Übungen für Plan", "", Notification.Type.HUMANIZED_MESSAGE);
 		}
-
 	}
 
 	private MyUI getParentUI() {
