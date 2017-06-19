@@ -51,7 +51,7 @@ public class LogShowChart extends VerticalLayout {
 		com.vaadin.addon.charts.model.Configuration conf = chart.getConfiguration();
 
 		conf.setTitle("Logs für Übung " + this.currentExercise.getName());
-		conf.setSubTitle("Workload (Wiederholungen x Gewicht x Sätze");
+		conf.setSubTitle("Workload (Wiederholungen x Gewicht x Sätze)");
 
 		XAxis x = new XAxis();
 
