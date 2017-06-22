@@ -58,16 +58,15 @@ public class OverviewView extends CssLayout implements View {
 
 		VerticalLayout contentLayoutWorkout = new VerticalLayout();
 		contentLayoutWorkout = this.buildUIWorkout();
-		contentLayoutWorkout.setStyleName("about-view");
+		contentLayoutWorkout.setStyleName("buildUiWorkout");
 		VerticalLayout contentLayoutExercises = new VerticalLayout();
 		contentLayoutExercises = this.buildUIExercises();
-		contentLayoutExercises.setStyleName("about-view");
+		contentLayoutExercises.setStyleName("buildUiExercises");
 		this.addComponents(contentLayoutWorkout, contentLayoutExercises);
 	}
 
 	private VerticalLayout buildUIExercises() {
 		VerticalLayout contentLayoutExercises = new VerticalLayout();
-		contentLayoutExercises.setStyleName("centering-layout");
 
 		this.gridExercises = new Grid<>();
 		this.gridExercises.setCaption("Übungen");

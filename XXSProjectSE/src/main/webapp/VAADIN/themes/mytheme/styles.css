@@ -12565,6 +12565,14 @@ div.v-layout.v-horizontal.v-widget {
 	height: 100%;
 }
 
+.mytheme .buildUiExercises {
+	max-width: 500px;
+}
+
+.mytheme .buildUiWorkout {
+	max-width: 500px;
+}
+
 .mytheme .about-view {
 	overflow: auto;
 }

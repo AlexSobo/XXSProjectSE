@@ -126,6 +126,13 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
       }
     }
   }
+ .buildUiExercises {
+ 	max-width: 500px;
+ }
+
+ .buildUiWorkout {
+ 	max-width: 500px;
+ }
 
   .about-view {
     overflow: auto;
