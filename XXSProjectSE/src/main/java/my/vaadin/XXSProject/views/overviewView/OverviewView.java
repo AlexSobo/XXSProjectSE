@@ -8,11 +8,11 @@ import java.util.Set;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -340,6 +340,7 @@ public class OverviewView extends CssLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+	
 		// Workout-Grid laden
 		this.existingWorkouts = new ArrayList<>();
 		WorkoutPlanTableConnector workoutProvider = new WorkoutPlanTableConnector();

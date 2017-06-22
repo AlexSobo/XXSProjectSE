@@ -38,7 +38,6 @@ public class LoginService implements LoginServiceInterface {
 		EntityManager em = emf.createEntityManager();
 
 		List<User> databaseUsers = em.createQuery("SELECT u FROM users u").getResultList();
-		System.out.println("im Login");
 
 		// Abgleich eingegebener Daten mit Datenbank-Bestand
 		for (User u : databaseUsers) {
