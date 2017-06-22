@@ -26,7 +26,6 @@ public class LoginScreen extends CssLayout {
 	private TextField tfUsername, tfUsernameNew, tfFirstName, tfLastName, tfEmail;
 	private PasswordField pfPassword, pfPasswordNew, pfPasswortRepeat;
 	private Button btnLogin, btnRegister;
-	private Button forgotPassword;
 	private CheckBox boxRegistered;
 	private VerticalLayout centeringLayout;
 	private FormLayout loginForm;
@@ -89,15 +88,6 @@ public class LoginScreen extends CssLayout {
 		});
 		btnLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnLogin.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-
-		buttons.addComponent(forgotPassword = new Button("Passwort vergessen?"));
-		forgotPassword.addClickListener(new Button.ClickListener() {
-			@Override
-			public void buttonClick(Button.ClickEvent event) {
-				showNotification(new Notification("tbd!"));
-			}
-		});
-		forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
 
 		loginForm.addComponent(buttons);
 		loginForm.addComponent(this.boxRegistered = new CheckBox("Bereits registriert"));
