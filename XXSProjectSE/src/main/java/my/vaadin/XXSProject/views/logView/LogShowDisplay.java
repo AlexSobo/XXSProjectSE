@@ -28,6 +28,7 @@ public class LogShowDisplay extends VerticalLayout {
 		lblHeaderText = new Label();
 		logsToShow = new ArrayList<>();
 		gridLogs = new Grid();
+		gridLogs.setWidth(100, Unit.PERCENTAGE);
 		this.gridLogs.setHeightByRows(5);
 		logProvider = new LogTableConnector();
 	}

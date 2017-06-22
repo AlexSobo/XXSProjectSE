@@ -79,8 +79,6 @@ public class LogView extends CssLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet
-		// ist
 
 		// Daten für Plan-Select laden
 		WorkoutPlanTableConnector workoutPlanProvider = new WorkoutPlanTableConnector();
