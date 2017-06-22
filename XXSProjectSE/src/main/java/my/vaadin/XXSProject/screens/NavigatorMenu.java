@@ -87,7 +87,6 @@ public class NavigatorMenu extends CssLayout {
 		showMenu.setIcon(VaadinIcons.MENU);
 		menuPart.addComponent(showMenu);
 
-		// container for the navigation buttons, which are added by addView()
 		menuItemsLayout = new CssLayout();
 		menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
 		menuPart.addComponent(menuItemsLayout);
