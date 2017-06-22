@@ -117,10 +117,6 @@ public class SettingsView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		System.out.println("Enter Methode wird ausgefuehrt");
-		// Automatische Weiterleitung zu LoginView, wenn Nutzer nicht angemeldet
-		// ist
-
 		// Vorausfüllen der Felder mit Daten aus der Datenbank
 		UserTableConnector userTableConnector = new UserTableConnector();
 		User userNow = userTableConnector.returnUser(this.getParentUI().getLoggedInUsername());

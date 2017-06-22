@@ -15,6 +15,7 @@ import com.vaadin.addon.charts.model.VerticalAlign;
 import com.vaadin.addon.charts.model.XAxis;
 import com.vaadin.addon.charts.model.YAxis;
 import com.vaadin.addon.charts.model.style.SolidColor;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.VerticalLayout;
 
 import my.vaadin.XXSProject.databaseClasses.LogTableConnector;
@@ -28,6 +29,8 @@ public class LogShowChart extends VerticalLayout {
 	private List<Log> logsToShow;
 
 	public LogShowChart() {
+		this.setSizeFull();
+		this.setWidth(100, Unit.PERCENTAGE);
 		logsToShow = new ArrayList<>();
 		this.chart = new Chart(ChartType.COLUMN);
 		this.addComponent(chart);

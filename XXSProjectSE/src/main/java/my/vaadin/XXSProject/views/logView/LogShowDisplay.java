@@ -3,6 +3,7 @@ package my.vaadin.XXSProject.views.logView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -22,6 +23,8 @@ public class LogShowDisplay extends VerticalLayout {
 
 	public LogShowDisplay() {
 
+		this.setSizeFull();
+		this.setWidth(100, Unit.PERCENTAGE);
 		lblHeaderText = new Label();
 		logsToShow = new ArrayList<>();
 		gridLogs = new Grid();

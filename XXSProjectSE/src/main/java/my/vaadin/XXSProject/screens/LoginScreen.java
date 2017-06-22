@@ -9,7 +9,6 @@ import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.LoginForm.LoginListener;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -17,8 +16,6 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import my.vaadin.XXSProject.MyUI;
-import my.vaadin.XXSProject.databaseClasses.LoginService;
-import my.vaadin.XXSProject.views.overviewView.OverviewView;
 
 /**
  * LoginScreen + Überprüfung der Logindaten.
@@ -31,15 +28,13 @@ public class LoginScreen extends CssLayout {
 	private Button btnLogin, btnRegister;
 	private Button forgotPassword;
 	private CheckBox boxRegistered;
-	private LoginListener loginListener;
-	private LoginService loginService;
 	private VerticalLayout centeringLayout;
 	private FormLayout loginForm;
 	private FormLayout registerForm;
 
 	public LoginScreen(MyUI ui) {
 		this.parentUi = ui;
-		this.loginService = parentUi.getLoginService();
+		parentUi.getLoginService();
 
 		if (this.parentUi.getLoggedInUsername() == null) {
 			buildUI();

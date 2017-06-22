@@ -12501,6 +12501,14 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.mytheme .v-window {
+	min-width: 300px !important;
+}
+
+.mytheme .v-label-undef-w {
+	white-space: inherit;
+}
+
 .mytheme .login-screen {
 	background: #3b3f42;
 	bottom: 0;
@@ -12602,6 +12610,7 @@ div.v-layout.v-horizontal.v-widget {
 	padding-left: 0;
 	padding-top: 60px;
 	padding-bottom: 60px;
+	overflow: auto;
 }
 
 .mytheme .v-ui[width-range~="0-800px"] .login-screen .login-form {
@@ -12642,10 +12651,6 @@ div.v-layout.v-horizontal.v-widget {
 	margin-bottom: 0;
 }
 
-.mytheme .v-ui[width-range~="0-550px"] .product-form-wrapper {
-	width: 100%;
-}
-
 .mytheme .v-ui[width-range~="0-550px"] .about-view {
 	padding-bottom: 0;
 	padding-top: 0;
@@ -12663,7 +12668,6 @@ div.v-layout.v-horizontal.v-widget {
 	height: auto;
 	vertical-align: top;
 	padding: 0;
-	background: transparent;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }

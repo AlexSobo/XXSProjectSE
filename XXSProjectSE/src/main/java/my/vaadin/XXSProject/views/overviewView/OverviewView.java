@@ -67,13 +67,13 @@ public class OverviewView extends CssLayout implements View {
 
 	private VerticalLayout buildUIExercises() {
 		VerticalLayout contentLayoutExercises = new VerticalLayout();
-		contentLayoutExercises.setWidthUndefined();
+		contentLayoutExercises.setStyleName("centering-layout");
 
 		this.gridExercises = new Grid<>();
 		this.gridExercises.setCaption("Übungen");
 		this.gridExercises.setSelectionMode(SelectionMode.SINGLE);
 		this.gridExercises.setHeightByRows(2);
-		this.gridExercises.setWidthUndefined();
+		this.gridExercises.setWidth(100, Unit.PERCENTAGE);
 
 		this.existingExercises = null;
 
@@ -200,13 +200,13 @@ public class OverviewView extends CssLayout implements View {
 
 	private VerticalLayout buildUIWorkout() {
 		VerticalLayout contentLayoutWorkout = new VerticalLayout();
-		contentLayoutWorkout.setWidthUndefined();
 
 		// Initialisierung der UI-Elemente
 		this.gridWorkouts = new Grid<>();
 		this.gridWorkouts.setCaption("Trainingspläne");
 		this.gridWorkouts.setSelectionMode(SelectionMode.SINGLE);
 		this.gridWorkouts.setHeightByRows(2);
+		this.gridWorkouts.setWidth(100, Unit.PERCENTAGE);
 
 		this.existingWorkouts = null;
 

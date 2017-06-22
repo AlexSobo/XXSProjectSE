@@ -95,41 +95,11 @@ public class NavigatorMenu extends CssLayout {
 		addComponent(menuPart);
 	}
 
-	/**
-	 * Register a pre-created view instance in the navigation menu and in the
-	 * {@link Navigator}.
-	 *
-	 * @see Navigator#addView(String, View)
-	 *
-	 * @param view
-	 *            view instance to register
-	 * @param name
-	 *            view name
-	 * @param caption
-	 *            view caption in the menu
-	 * @param icon
-	 *            view icon in the menu
-	 */
 	public void addView(View view, final String name, String caption, Resource icon) {
 		navigator.addView(name, view);
 		createViewButton(name, caption, icon);
 	}
 
-	/**
-	 * Register a view in the navigation menu and in the {@link Navigator} based
-	 * on a view class.
-	 *
-	 * @see Navigator#addView(String, Class)
-	 *
-	 * @param viewClass
-	 *            class of the views to create
-	 * @param name
-	 *            view name
-	 * @param caption
-	 *            view caption in the menu
-	 * @param icon
-	 *            view icon in the menu
-	 */
 	public void addView(Class<? extends View> viewClass, final String name, String caption, Resource icon) {
 		navigator.addView(name, viewClass);
 		createViewButton(name, caption, icon);
@@ -150,13 +120,6 @@ public class NavigatorMenu extends CssLayout {
 		viewButtons.put(name, button);
 	}
 
-	/**
-	 * Highlights a view navigation button as the currently active view in the
-	 * menu. This method does not perform the actual navigation.
-	 *
-	 * @param viewName
-	 *            the name of the view to show as active
-	 */
 	public void setActiveView(String viewName) {
 		for (Button button : viewButtons.values()) {
 			button.removeStyleName("selected");

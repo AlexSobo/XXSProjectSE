@@ -42,6 +42,7 @@ public class AboutView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+		
 	}
 
 }

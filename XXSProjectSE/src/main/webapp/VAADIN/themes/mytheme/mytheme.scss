@@ -45,7 +45,6 @@ $v-unit-size: 32px !default;
 $login-info-width: 300px !default;
 $login-info-opacity: 0.7 !default;
 $login-background-color: $editor-background-color !default;
-// Get more background images from unsplash.com (remember to optimize the filesize)
 $login-background-image: "img/archetype-login-bg.jpg" !default;
 
 $editor-shadow: 0 0 10px 10px rgba(0,0,0,.1) !default;
@@ -67,9 +66,16 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
 
 @mixin mytheme {
   @include valo;
-
-
-  // login screen - for small screens, see below
+  
+  .v-window {
+      min-width: 300px !important;
+ }
+  
+ .v-label-undef-w {
+ 	white-space: inherit;
+ 	}
+ 
+ 
   .login-screen {
     background: $editor-background-color;
     bottom:0;
@@ -121,30 +127,22 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
     }
   }
 
-// About view
-
   .about-view {
     overflow: auto;
 
     .about-content {
       @include valo-panel-style;
       max-width: 700px;
-      // Override the default of CustomLayout
       padding: $v-unit-size !important;
     }
   }
 
-  // Style rules for smaller display sizes
-
-  // No top menu on the login view, login screen layout changes
   .v-ui[width-range~="0-800px"] {
 
     .main-screen {
       padding-top: $v-unit-size;
     }
-    // TODO also move loading indicator if using the hack above
 
-    // More compact login screen
     .login-screen {
       height: auto;
       min-height: 100%;
@@ -170,6 +168,7 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
         padding-left: 0;
         padding-top: 60px;
         padding-bottom: 60px;
+        overflow: auto;
        
       }
 
@@ -203,7 +202,6 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
     }
   }
 
-  // hide the logo for a more compact header when the menu is narrow
   .v-ui[width-range~="801px-1100px"] .valo-menu-part {
     .v-slot-logo,
     .v-slot-logo + .v-spacing {
@@ -211,7 +209,6 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
     }
   }
 
-  // Move logout button to the bottom of the menu on large screens
   .v-ui[width-range~="801px-"] .valo-menu-part {
     .user-menu {
       position: fixed;
@@ -220,13 +217,8 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
     }
   }
 
-  // Editor should take whole browser width when we are under 550px in width.
   .v-ui[width-range~="0-550px"] {
-    .product-form-wrapper {
-      width:100%;
-    }
 
-     // About view fills the display on small screens
     .about-view {
       padding-bottom: 0;
       padding-top: 0;
@@ -243,20 +235,17 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
         height: auto;
         vertical-align: top;
         padding: 0;
-        background: transparent;
         @include box-shadow(none);
       }
     }
   }
 
-  // Override valo default narrow menu button on small screens to have the full logout text visible
   .v-ui[width-range~="0-500px"] {
     .valo-menu .v-menubar-user-menu .v-menubar-menuitem-caption {
       width: auto;
     }
   }
 
-  // Hide spinner buttons from number input
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;

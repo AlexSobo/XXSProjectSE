@@ -14,8 +14,6 @@ import my.vaadin.XXSProject.views.settingsView.SettingsView;
 
 /**
  * Innenbereich der App
- * 
- * 
  */
 public class MainScreen extends HorizontalLayout {
 	private NavigatorMenu navigatorMenu;
