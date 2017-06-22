@@ -159,7 +159,7 @@ public class LoginScreen extends CssLayout {
 	private CssLayout buildLoginInformation() {
 		CssLayout loginInformation = new CssLayout();
 		loginInformation.setStyleName("login-information");
-		Label loginInfoText = new Label("<h1>XXS PumperApp</h1>" + "Ein Projekt von Felix, Alex und Dennis",
+		Label loginInfoText = new Label("<h1>XXS PumperApp</h1>" + "Ein Projekt von Felix, Alex und Dennis" + "Tracking gainz, looking good and feeling great.",
 				ContentMode.HTML);
 		loginInfoText.setSizeFull();
 		loginInformation.addComponent(loginInfoText);
