@@ -60,11 +60,4 @@ public class LoginService implements LoginServiceInterface {
 		this.get().getSession().setAttribute("user", null);
 
 	}
-
-	// Über diese Funktion können lokal Dummy-Testdaten in die Session geladen
-	// werden
-	public boolean dummyLogIn() {
-		parentUI.get().getSession().setAttribute("user", "dennsi");
-		return true;
-	}
 }

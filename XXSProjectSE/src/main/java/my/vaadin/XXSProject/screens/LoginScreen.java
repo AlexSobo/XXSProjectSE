@@ -95,15 +95,6 @@ public class LoginScreen extends CssLayout {
 		btnLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btnLogin.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-		// TODO Dummy-Login entfernen
-		Button btnDummy;
-		buttons.addComponent(btnDummy = new Button("Dummy-Loggin"));
-		btnDummy.addClickListener(event -> {
-			this.parentUi.getLoginService().dummyLogIn();
-			this.parentUi.showMainView();
-		});
-		btnDummy.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-
 		buttons.addComponent(forgotPassword = new Button("Passwort vergessen?"));
 		forgotPassword.addClickListener(new Button.ClickListener() {
 			@Override
@@ -159,7 +150,7 @@ public class LoginScreen extends CssLayout {
 	private CssLayout buildLoginInformation() {
 		CssLayout loginInformation = new CssLayout();
 		loginInformation.setStyleName("login-information");
-		Label loginInfoText = new Label("<h1>XXS PumperApp</h1>" + "Ein Projekt von Felix, Alex und Dennis" + "Tracking gainz, looking good and feeling great.",
+		Label loginInfoText = new Label("<h1>XXS PumperApp</h1>" + "Ein Projekt von Felix, Alex und Dennis" + "<br>Tracking gainz, looking good and feeling great.",
 				ContentMode.HTML);
 		loginInfoText.setSizeFull();
 		loginInformation.addComponent(loginInfoText);

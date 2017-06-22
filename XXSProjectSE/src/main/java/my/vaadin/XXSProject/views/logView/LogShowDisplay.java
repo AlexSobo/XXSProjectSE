@@ -25,7 +25,7 @@ public class LogShowDisplay extends VerticalLayout {
 		lblHeaderText = new Label();
 		logsToShow = new ArrayList<>();
 		gridLogs = new Grid();
-		this.gridLogs.setHeightByRows(3);
+		this.gridLogs.setHeightByRows(5);
 		logProvider = new LogTableConnector();
 	}
 
@@ -48,7 +48,6 @@ public class LogShowDisplay extends VerticalLayout {
 		this.lblHeaderText.setValue("Logs für Übung " + this.currentExercise.getName());
 		if (logsToShow.size() != 0) {
 			this.gridLogs.setItems(logsToShow);
-			this.gridLogs.setHeightByRows(this.logsToShow.size());
 
 			this.gridLogs.addColumn(Log::getDate).setCaption("Datum");
 			this.gridLogs.addColumn(Log::getReps).setCaption("Wiederholungen");
