@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -328,7 +330,22 @@ public class LogAddDisplay extends VerticalLayout {
 			this.existingLogs = logProvider.getLogsForUsernameWorkoutPlanExercise(this.exercise.getFkUsername(),
 					this.exercise.getFkWorkoutplanName(), this.exercise.getName());
 
-			this.lblExerciseName.setValue(this.lblExerciseName.getValue() + " - gespeichert ✅");
+			//UI zurücksetzen
+			this.btnAcceptReps.setEnabled(true);
+			this.btnAcceptSets.setEnabled(true);
+			this.btnAcceptWeights.setEnabled(true);
+			this.btnAcceptDate.setEnabled(true);
+			this.btnDeclineReps.setEnabled(true);
+			this.btnDeclineSets.setEnabled(true);
+			this.btnDeclineWeights.setEnabled(true);
+			this.btnDeclineDate.setEnabled(true);
+			this.tfReps.setEnabled(true);
+			this.tfSets.setEnabled(true);
+			this.tfWeights.setEnabled(true);
+			this.dfDate.setEnabled(true);
+			this.tfReps.setValue("");
+			this.tfSets.setValue("");
+			this.tfWeights.setValue("");
 		} else {
 			Notification.show("Es exisitert bereits ein Log für diese Übung und diesen Tag", "", Notification.Type.HUMANIZED_MESSAGE);
 			this.btnAcceptDate.setEnabled(true);

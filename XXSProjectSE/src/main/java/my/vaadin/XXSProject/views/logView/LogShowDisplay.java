@@ -1,6 +1,8 @@
 package my.vaadin.XXSProject.views.logView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.vaadin.server.Sizeable.Unit;
@@ -48,7 +50,19 @@ public class LogShowDisplay extends VerticalLayout {
 		// Neue Logs anzeigen
 		this.logsToShow = logProvider.getLogsForUsernameWorkoutPlanExercise(this.currentExercise.getFkUsername(),
 				this.currentExercise.getFkWorkoutplanName(), this.currentExercise.getName());
-
+		Collections.sort(this.logsToShow, new Comparator<Log>() {
+			@Override
+			public int compare(Log log1, Log log2) {
+				if(log1.getDate().before(log2.getDate())){
+					return -1;
+				} else {
+					return 1;
+				}
+				
+			}
+         });
+		
+		
 		this.lblHeaderText.setValue("Logs für Übung " + this.currentExercise.getName());
 		if (logsToShow.size() != 0) {
 			this.gridLogs.setItems(logsToShow);
